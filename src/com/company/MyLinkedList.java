@@ -6,7 +6,6 @@ package com.company;
 public class MyLinkedList implements MyList {
     private MyLinkedNode first;
 
-
     @Override
     public void add(Object o) {
         if (first == null) {
@@ -26,6 +25,7 @@ public class MyLinkedList implements MyList {
         head.setNext(first);
         first = head;
     }
+
     @Override
     public void insert(int i, Object o) {
         if (i > this.size() | i < 0) {
@@ -48,7 +48,6 @@ public class MyLinkedList implements MyList {
 
     }
 
-
     @Override
     public String toString() {
         String temp = "";
@@ -57,7 +56,6 @@ public class MyLinkedList implements MyList {
         }
         return temp;
     }
-
 
     @Override
     public int size() {

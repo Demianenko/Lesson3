@@ -21,18 +21,33 @@ public class MyLinkedList implements MyList {
         }
     }
 
+    public void addInStart(Object o) {
+        MyLinkedNode head = new MyLinkedNode(o,null);
+        head.setNext(first);
+        first = head;
+    }
     @Override
     public void insert(int i, Object o) {
-        int temp = 0;
-        MyLinkedNode head = new MyLinkedNode(o,null);
-        for(MyLinkedNode node = first; node != null; node=node.getNext()) {
-            if(temp == i) {
-                head.setNext(node);
-                node.setNext(head);
-                return;
+        if (i > this.size() | i < 0) {
+            throw new IndexOutOfBoundsException("Мимо");
+        }
+        if (i == 0) {
+            addInStart(o);
+        } else {
+            int temp = 0;
+            MyLinkedNode head = new MyLinkedNode(o,null);
+            for(MyLinkedNode node = first; node != null; node=node.getNext()) {
+                if(temp+1 == i) {
+                    head.setNext(node.getNext());
+                    node.setNext(head);
+                    return;
+                }
+                temp++;
             }
         }
+
     }
+
 
     @Override
     public String toString() {
@@ -42,6 +57,7 @@ public class MyLinkedList implements MyList {
         }
         return temp;
     }
+
 
     @Override
     public int size() {
@@ -75,9 +91,31 @@ public class MyLinkedList implements MyList {
         return null;
     }
 
+    public  Object removeFromStart(){
+        Object removed = first.getValue();
+        first = first.getNext();
+        return removed;
+    }
+
     @Override
     public Object remove(int i) {
-        return null;
+        if (i >= this.size()| i < 0) {
+            throw new IndexOutOfBoundsException("Мимо");
+        }
+        if(i==0) {
+           return removeFromStart();
+        } else {
+            Object removed = new IndexOutOfBoundsException("Что то пошло не так");
+            int temp = 0;
+            for (MyLinkedNode node = first; node != null; node = node.getNext()) {
+                if (temp+1 == i) {
+                    removed = node.getNext().getValue();
+                    node.setNext(node.getNext().getNext());
+                }
+                temp++;
+            }
+            return removed;
+        }
     }
 
     @Override

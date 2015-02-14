@@ -96,18 +96,24 @@ public class Node {
     }
 
     public Object remove(int i) {
-        if(next.next==null){
-            Object temp = next.value;
-            this.next = null;
+        if(next==null) {
+            Object temp = value;
+            clear();
             return temp;
         } else {
-            if(i==0) {
-                Object temp = value;
-                this.value = next.value;
-                this.next = next.next;
+            if(next.next==null){
+                Object temp = next.value;
+                this.next = null;
                 return temp;
             } else {
-                return next.remove(i-1);
+                if(i==0) {
+                    Object temp = value;
+                    this.value = next.value;
+                    this.next = next.next;
+                    return temp;
+                } else {
+                    return next.remove(i-1);
+                }
             }
         }
 
@@ -122,6 +128,9 @@ public class Node {
         return value + ","+(next == null ? "null" : next.toString());
     }*/
     public String toString(){
+        /*if(value==null) {
+            return "null";
+        }*/
         if(next == null) {
             return value+","+"null";
         } else {

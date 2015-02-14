@@ -1,4 +1,5 @@
-import com.company.MyLinkedList;
+import com.company.MyList;
+import com.company.RecList;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -9,7 +10,8 @@ import org.junit.Test;
 public class MyTest {
     @Test
     public void testLesson() throws Exception {
-        MyLinkedList list = new MyLinkedList();
+        //MyList list = new MyLinkedList();
+        MyList list = new RecList();
         Object ob = new Object();
         Object badOb = new Object();
 

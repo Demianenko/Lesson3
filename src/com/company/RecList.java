@@ -4,7 +4,7 @@ package com.company;
  * Created by sega on 13.02.2015.
  */
 public class RecList implements MyList{
-    public Node first;
+    private Node first;
 
 
 

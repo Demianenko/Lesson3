@@ -4,8 +4,8 @@ package com.company;
  * Created by sega on 13.02.2015.
  */
 public class Node {
-    public Object value;
-    public Node  next;
+    private Object value;
+    private Node  next;
 
     public Object getValue() {
         return value;

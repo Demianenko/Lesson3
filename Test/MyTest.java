@@ -21,7 +21,7 @@ public class MyTest {
         Assert.assertTrue(list.indexOf(ob)==-1);
         Assert.assertTrue(!list.contains(ob));
         list.put(0,ob);
-        list.size();
+        Assert.assertTrue(list.size()==0);
         list.clear();
         list.add(ob);
         Assert.assertTrue(list.get(0)==ob);

@@ -128,9 +128,18 @@ public class MyLinkedList implements MyList {
 
     @Override
     public void put(int i, Object o) {
-        if (i >= this.size()| i < 0) {
-            throw new IndexOutOfBoundsException("Мимо");
+        try {
+            if(this.size()==0) {
+                throw new IndexOutOfBoundsException("Список отсутствует");
+            }
+            if (i >= this.size()| i < 0) {
+                throw new IndexOutOfBoundsException("Мимо");
+            }
         }
+        catch (IndexOutOfBoundsException e) {
+            System.err.println("AAAAAAAAAAAAAAA " + e);
+        }
+
         int temp = 0;
         for (MyLinkedNode node = first; node != null; node = node.getNext()) {
             if (temp == i) {

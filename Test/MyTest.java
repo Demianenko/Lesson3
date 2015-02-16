@@ -1,3 +1,4 @@
+import com.company.MyLinkedList;
 import com.company.MyList;
 import com.company.RecList;
 import junit.framework.Assert;
@@ -10,15 +11,18 @@ import org.junit.Test;
 public class MyTest {
     @Test
     public void testLesson() throws Exception {
-        //MyList list = new MyLinkedList();
-        MyList list = new RecList();
+        MyList list = new MyLinkedList();
+        //MyList list = new RecList();
         Object ob = new Object();
         Object badOb = new Object();
 
         Assert.assertTrue(list.size()==0);
         Assert.assertTrue(list.isEmpty());
         Assert.assertTrue(list.indexOf(ob)==-1);
-
+        Assert.assertTrue(!list.contains(ob));
+        list.put(0,ob);
+        list.size();
+        list.clear();
         list.add(ob);
         Assert.assertTrue(list.get(0)==ob);
         Assert.assertTrue(list.size()==1);

@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lesson3/com/company/MyLinkedList.class" afterPath="$PROJECT_DIR$/out/production/Lesson3/com/company/MyLinkedList.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/MyCollection.java" afterPath="$PROJECT_DIR$/src/com/company/MyCollection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/MyIterator.java" afterPath="$PROJECT_DIR$/src/com/company/MyIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/MyLinkedList.java" afterPath="$PROJECT_DIR$/src/com/company/MyLinkedList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/MyListIterator.java" afterPath="$PROJECT_DIR$/src/com/company/MyListIterator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -641,7 +640,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424519623112</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="16.35">
+      <created>1424529307418</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1424529307418</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -691,7 +696,8 @@
     </option>
     <MESSAGE value="15.56" />
     <MESSAGE value="13.25" />
-    <option name="LAST_COMMIT_MESSAGE" value="13.25" />
+    <MESSAGE value="16.35" />
+    <option name="LAST_COMMIT_MESSAGE" value="16.35" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

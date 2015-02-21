@@ -70,12 +70,11 @@ public class MyLinkedList implements MyList {
         if (first == null) {
             first = new MyLinkedNode(o,null);
         } else {
-            for(MyLinkedNode node = first; node != null; node=node.getNext()) {
-                if(node.getNext() == null) {
-                    node.setNext(new MyLinkedNode(o, null));
-                    return;
-                }
+            MyLinkedNode node = first;
+            while (node.getNext()!=null) {
+                node = node.getNext();
             }
+            node.setNext(new MyLinkedNode(o, null));
         }
     }
 
@@ -93,14 +92,14 @@ public class MyLinkedList implements MyList {
         if (i == 0) {
             addInStart(o);
         } else {
-            int temp = 0;
             MyLinkedNode head = new MyLinkedNode(o,null);
-            for(MyLinkedNode node = first; node != null; node=node.getNext()) {
+            MyLinkedNode node = first;
+            for(int temp = 0; temp < i; temp++) {
                 if(temp+1 == i) {
                     head.setNext(node.getNext());
                     node.setNext(head);
-                    return;
                 }
+                node=node.getNext();
                 temp++;
             }
         }
@@ -162,13 +161,14 @@ public class MyLinkedList implements MyList {
         if(i==0) {
            return removeFromStart();
         } else {
-            Object removed = new IndexOutOfBoundsException("Что то пошло не так");
-            int temp = 0;
-            for (MyLinkedNode node = first; node != null; node = node.getNext()) {
+            MyLinkedNode node = first;
+            Object removed = null;
+            for (int temp = 0; temp<i;temp++) {
                 if (temp+1 == i) {
                     removed = node.getNext().getValue();
                     node.setNext(node.getNext().getNext());
                 }
+                node=node.getNext();
                 temp++;
             }
             return removed;

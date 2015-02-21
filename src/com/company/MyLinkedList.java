@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ConcurrentModificationException;
+
 /**
  * Created by user on 12.02.2015.
  */
@@ -37,9 +39,17 @@ public class MyLinkedList implements MyList {
     }
     private class MyLinkedListIterator implements MyIterator {
 
+        private Object hashValue = this.hashCode();
         private MyLinkedNode currentPlace = first;
         private int index = 0;
         private MyLinkedNode previous = null;
+
+        private Object getHash() {
+            return this.hashCode();
+        }
+        private void setHash() {
+            hashValue=this.hashCode();
+        }
         @Override
         public boolean hasNext() {
             return currentPlace.next != null;
@@ -49,13 +59,18 @@ public class MyLinkedList implements MyList {
         public void remove() {
             if(previous==null) {
                 first=first.getNext();
+                setHash();
             } else {
                 previous.setNext(currentPlace.next);
+                setHash();
             }
         }
 
         @Override
         public Object next() {
+            if(getHash()!=hashValue) {
+                throw new ConcurrentModificationException();
+            }
             previous = currentPlace;
             currentPlace = currentPlace.getNext();
             return currentPlace.getValue();

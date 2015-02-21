@@ -4,6 +4,59 @@ package com.company;
  * Created by user on 12.02.2015.
  */
 public class MyLinkedList implements MyList {
+    private class MyLinkedNode {
+
+        private MyLinkedNode next;
+        private Object value;
+
+        public MyLinkedNode() {
+            next = null;
+            value = null;
+        }
+
+        public MyLinkedNode(Object value,MyLinkedNode next) {
+            this.next = next;
+            this.value = value;
+        }
+
+        public MyLinkedNode getNext() {
+            return next;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
+
+        public void setNext(MyLinkedNode next) {
+            this.next = next;
+        }
+    }
+    private class MyLinkedListIterator implements MyIterator {
+
+        MyLinkedNode currentPlace = first;
+
+        @Override
+        public boolean hasNext() {
+            return currentPlace.next != null;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+    }
+    public MyIterator iterator() {
+        return new MyLinkedListIterator();
+    }
     private MyLinkedNode first;
 
     @Override

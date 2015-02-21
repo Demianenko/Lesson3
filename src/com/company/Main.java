@@ -9,7 +9,14 @@ public class Main {
         list.add(0);
         list.add(1);
         list.add(2);
+        System.out.println(list);
         MyIterator it = list.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+        while (it.hasNext()) {
+            list.remove(1);
+        }
         while (it.hasNext()) {
             System.out.println(it.next());
         }

@@ -39,12 +39,12 @@ public class MyLinkedList implements MyList {
     }
     private class MyLinkedListIterator implements MyIterator {
 
-        private Object hashValue = this.hashCode();
+        private int hashValue = this.hashCode();
         private MyLinkedNode currentPlace = first;
         private int index = 0;
         private MyLinkedNode previous = null;
 
-        private Object getHash() {
+        private int getHash() {
             return this.hashCode();
         }
         private void setHash() {
@@ -52,7 +52,7 @@ public class MyLinkedList implements MyList {
         }
         @Override
         public boolean hasNext() {
-            return currentPlace.next != null;
+            return currentPlace != null;
         }
 
         @Override
@@ -68,12 +68,14 @@ public class MyLinkedList implements MyList {
 
         @Override
         public Object next() {
-            if(getHash()!=hashValue) {
+            Object next = currentPlace.getValue();
+            int temp = getHash();
+            if(temp!=hashValue) {
                 throw new ConcurrentModificationException("удаление");
             }
             previous = currentPlace;
             currentPlace = currentPlace.getNext();
-            return currentPlace.getValue();
+            return next;
         }
     }
     public MyIterator iterator() {

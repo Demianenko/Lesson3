@@ -1,6 +1,5 @@
 import com.company.MyLinkedList;
 import com.company.MyList;
-import com.company.RecList;
 import junit.framework.Assert;
 import org.junit.Test;
 

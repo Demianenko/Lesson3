@@ -1,9 +1,12 @@
-package com.company;
+package com.company.More;
+
+import com.company.MyIterator;
+import com.company.MyList;
 
 /**
  * Created by sega on 13.02.2015.
  */
-public class RecList implements MyList{
+public class RecList implements MyList {
     private Node first;
 
 
@@ -68,6 +71,17 @@ public class RecList implements MyList{
             first.insert(i,o);
         }
     }
+
+    @Override
+    public MyIterator iterator() {
+        return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
     @Override
     public Object remove(int i) {
         if (first==null) {

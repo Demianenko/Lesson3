@@ -57,6 +57,12 @@ public class MyLinkedList implements MyList {
     public MyIterator iterator() {
         return new MyLinkedListIterator();
     }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
     private MyLinkedNode first;
 
     @Override

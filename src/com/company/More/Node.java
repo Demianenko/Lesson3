@@ -1,4 +1,4 @@
-package com.company;
+package com.company.More;
 
 /**
  * Created by sega on 13.02.2015.

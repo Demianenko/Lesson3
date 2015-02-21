@@ -69,7 +69,7 @@ public class MyLinkedList implements MyList {
         @Override
         public Object next() {
             if(getHash()!=hashValue) {
-                throw new ConcurrentModificationException();
+                throw new ConcurrentModificationException("удаление");
             }
             previous = currentPlace;
             currentPlace = currentPlace.getNext();

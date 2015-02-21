@@ -37,8 +37,9 @@ public class MyLinkedList implements MyList {
     }
     private class MyLinkedListIterator implements MyIterator {
 
-        MyLinkedNode currentPlace = first;
-
+        private MyLinkedNode currentPlace = first;
+        private int index = 0;
+        private MyLinkedNode previous = null;
         @Override
         public boolean hasNext() {
             return currentPlace.next != null;
@@ -46,12 +47,18 @@ public class MyLinkedList implements MyList {
 
         @Override
         public void remove() {
-
+            if(previous==null) {
+                first=first.getNext();
+            } else {
+                previous.setNext(currentPlace.next);
+            }
         }
 
         @Override
         public Object next() {
-            return null;
+            previous = currentPlace;
+            currentPlace = currentPlace.getNext();
+            return currentPlace.getValue();
         }
     }
     public MyIterator iterator() {
@@ -210,15 +217,13 @@ public class MyLinkedList implements MyList {
 
     @Override
     public int indexOf(Object o) {
-        int temp = 0;
-        for (MyLinkedNode node = first; node != null; node = node.getNext()) {
+        MyLinkedNode node = first;
+        for ( int i = 0; node!=null; i++) {
             if (node.getValue().equals(o)) {
-                return temp;
+                return i;
             }
-            temp++;
         }
         return -1;
     }
-
 
 }

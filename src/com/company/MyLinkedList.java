@@ -6,8 +6,8 @@ import java.util.ConcurrentModificationException;
  * Created by user on 12.02.2015.
  */
 public class MyLinkedList implements MyList {
-    private class MyLinkedNode {
 
+    private class MyLinkedNode {
         private MyLinkedNode next;
         private Object value;
 
@@ -37,45 +37,61 @@ public class MyLinkedList implements MyList {
             this.next = next;
         }
     }
-    private class MyLinkedListIterator implements MyIterator {
 
-        private int hashValue = this.hashCode();
-        private MyLinkedNode currentPlace = first;
+    private class MyLinkedListIterator implements MyIterator {
         private int index = 0;
+        private MyLinkedNode currentPlace = first;
+        private int startIndexOfChanges = indexOfChanges;
         private MyLinkedNode previous = null;
 
-        private int getHash() {
-            return this.hashCode();
-        }
-        private void setHash() {
-            hashValue=this.hashCode();
-        }
         @Override
         public boolean hasNext() {
             return currentPlace != null;
         }
 
         @Override
-        public void remove() {
-            if(previous==null) {
-                first=first.getNext();
-                setHash();
-            } else {
-                previous.setNext(currentPlace.next);
-                setHash();
-            }
-        }
-
-        @Override
         public Object next() {
+            index++;
             Object next = currentPlace.getValue();
-            int temp = getHash();
-            if(temp!=hashValue) {
-                throw new ConcurrentModificationException("удаление");
+            if(startIndexOfChanges !=indexOfChanges) {
+                throw new ConcurrentModificationException("Кто-то, что-то изменил в обход итератора, пока он работал");
             }
             previous = currentPlace;
             currentPlace = currentPlace.getNext();
             return next;
+        }
+        public boolean hasPrevious() {
+            return previous != null;
+        }
+        Object previous() {
+            if(hasPrevious()){
+                return previous.getValue();
+            } else {
+                return null;
+            }
+        }
+        int nextIndex() {
+            return index;
+        }
+        @Override
+        public void remove() {
+            if(hasPrevious()) {
+                first=first.getNext();
+            } else {
+                currentPlace=currentPlace.getNext();
+                previous.setNext(currentPlace);
+            }
+        }
+        void set(Object e) {
+            currentPlace.setValue(e);
+        }
+        void add(Object e) {
+            if (first == null) {
+                first = new MyLinkedNode(e,null);
+            } else {
+                MyLinkedNode node = new MyLinkedNode(e,currentPlace.getNext());
+                currentPlace.setNext(node);
+            }
         }
     }
     public MyIterator iterator() {
@@ -88,9 +104,11 @@ public class MyLinkedList implements MyList {
     }
 
     private MyLinkedNode first;
+    private int indexOfChanges = 0;
 
     @Override
     public void add(Object o) {
+        indexOfChanges++;
         if (first == null) {
             first = new MyLinkedNode(o,null);
         } else {
@@ -103,6 +121,7 @@ public class MyLinkedList implements MyList {
     }
 
     public void addInStart(Object o) {
+        indexOfChanges++;
         MyLinkedNode head = new MyLinkedNode(o,null);
         head.setNext(first);
         first = head;
@@ -110,6 +129,7 @@ public class MyLinkedList implements MyList {
 
     @Override
     public void insert(int i, Object o) {
+        indexOfChanges++;
         if (i > this.size() | i < 0) {
             throw new IndexOutOfBoundsException("Мимо");
         }
@@ -172,6 +192,7 @@ public class MyLinkedList implements MyList {
     }
 
     public  Object removeFromStart(){
+        indexOfChanges++;
         Object removed = first.getValue();
         first = first.getNext();
         return removed;
@@ -179,6 +200,7 @@ public class MyLinkedList implements MyList {
 
     @Override
     public Object remove(int i) {
+        indexOfChanges++;
         if (i >= this.size()| i < 0) {
             throw new IndexOutOfBoundsException("Мимо");
         }
@@ -211,6 +233,7 @@ public class MyLinkedList implements MyList {
 
     @Override
     public void put(int i, Object o) {
+        indexOfChanges++;
         try {
             if(this.size()==0) {
                 throw new IndexOutOfBoundsException("Список отсутствует");

@@ -10,15 +10,21 @@ public class Main {
         list.add(1);
         list.add(2);
         System.out.println(list);
+        System.out.println("_______________________________________");
         MyIterator it = list.iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
+
         }
-        while (it.hasNext()) {
-            list.remove(1);
+        MyIterator it1 = list.iterator();
+        while (it1.hasNext()) {
+            it1.next();
+            list.put(0,5);
         }
-        while (it.hasNext()) {
-            System.out.println(it.next());
+        System.out.println("__________________________________________");
+        MyIterator it2 = list.iterator();
+        while (it2.hasNext()) {
+            System.out.println(it2.next());
         }
         /*
         MyLinkedList list = new MyLinkedList();

@@ -14,6 +14,8 @@ public class Main {
         System.out.println(set);
         System.out.println(set.add(1));
         System.out.println(set);
+        System.out.println(set.size());
+
         System.out.println(set.add(2));
         System.out.println(set);
         System.out.println(set.add(0));
@@ -42,11 +44,7 @@ public class Main {
         System.out.println(iterator.next());
         iterator.remove();
         System.out.println(set);
-        /*
-        testMyLinkedList(new MyLinkedList());
-        System.out.println("---------------------------------------------------------------");
-        testMyLinkedList(new MyArrayList());
-        */
+       
 
 
     }

@@ -4,7 +4,7 @@ package com.company;
  * Created by sega on 24.03.2015.
  */
 public class MyHashSet implements MyCollection {
-    private static final int DEFAULT_CAPACITY = 2;
+    private static final int DEFAULT_CAPACITY = 10;
     private static final float DEFAULT_FILL_RATIO = 0.75f;
     private int capacity;
     private float fillRatio;
@@ -189,7 +189,7 @@ public class MyHashSet implements MyCollection {
 
     @Override
     public int size() {
-        return internalSize = 0;
+        return internalSize;
     }
 
     @Override

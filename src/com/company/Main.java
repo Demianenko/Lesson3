@@ -1,16 +1,17 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        MyTreeSet treeSet = new MyTreeSet();
         MyHashSet set = new MyHashSet();
-
+        Person first = new Person(1,"First");
+        Person second = new Person(2, "Second");
+        MyTreeSet<Person> treeSet1 = new MyTreeSet<Person>();
+        treeSet.add(first);
+        treeSet.add(second);
 
 
 

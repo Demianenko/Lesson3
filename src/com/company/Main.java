@@ -8,7 +8,15 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
         MyHashSet set = new MyHashSet();
+
+
+
+
+    }
+
+    public static void testMyHashSet(MyHashSet set) {
         System.out.println(set);
         System.out.println(set.add(1));
         System.out.println(set);
@@ -44,8 +52,6 @@ public class Main {
         System.out.println(iterator.next());
         iterator.remove();
         System.out.println(set);
-       
-
 
     }
     public static void testMyLinkedList(MyList list) {

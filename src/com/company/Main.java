@@ -1,20 +1,22 @@
 package com.company;
 
-import java.util.*;
-
 public class Main {
 
     public static void main(String[] args) {
-        MyTreeSet treeSet = new MyTreeSet();
-        MyHashSet set = new MyHashSet();
-        Person first = new Person(1,"First");
-        Person second = new Person(2, "Second");
-        MyTreeSet<Person> treeSet1 = new MyTreeSet<Person>();
+        Person first = new Person(50,"First");
+        Person second = new Person(75, "R1");
+        MyTreeSet<Person> treeSet = new MyTreeSet(new Person.PersonComparator());
+
+
         treeSet.add(first);
         treeSet.add(second);
+        treeSet.add(new Person(25,"L1"));
+        treeSet.add(new Person(20,"L2"));
+        treeSet.add(new Person(23,"L3"));
+        treeSet.add(new Person(20,"L4"));
+        System.out.println(treeSet.size());
 
-
-
+        MyHashSet set = new MyHashSet();
     }
 
     public static void testMyHashSet(MyHashSet set) {

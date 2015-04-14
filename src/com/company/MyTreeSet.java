@@ -20,6 +20,7 @@ public class MyTreeSet<E> {
     MyTreeSet(){
         this.comparator = null;
     }
+
     private class MyTreeNode {
         private E value;
         private MyTreeNode parent;
@@ -38,6 +39,23 @@ public class MyTreeSet<E> {
         }
         public MyTreeNode() {
             this(null,null,null,null);
+        }
+    }
+    private class TreeIterator implements MyIterator {
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+
         }
     }
 
@@ -86,30 +104,63 @@ public class MyTreeSet<E> {
         }
     }
     public boolean remove (E o) {
-        if(size==0) {
+        if(size == 0) {
             return false;
-        }
-        currentNode = head;
-        if(size==1) {
+        } else if(size == 1) {
             if(way(o)==0) {
-               
+                head = null;
+                currentNode = head;
+                size--;
+                return true;
+            } else {
+                return false;
             }
-        }
-
-        int temp = way(o);
-        if (temp==0) {
-            if (size < 2) {
-
+        } else {
+            currentNode = head;
+            int temp = way(o);
+            while (isDeep(temp)) {
+                temp = way(o);
             }
-        }
-        while (isDeep(temp));
         if (temp == 0) {
-
+            MyTreeNode tempNodeRight = currentNode.right;
+            MyTreeNode tempNodeLeft = currentNode.left;
+            MyTreeNode tempNodeParent = currentNode.parent;
+            if((currentNode.left != null) && (currentNode.right != null)) {
+                clearRefers();
+                currentNode = tempNodeLeft;
+                while (currentNode.right != null) {
+                    currentNode = currentNode.right;
+                }
+                currentNode.right = tempNodeRight;
+                tempNodeRight.parent = currentNode;
+                if(tempNodeParent == null) {
+                    head = currentNode;
+                }
+                currentNode.parent = tempNodeParent;
+            } else if(currentNode.left == null) {
+                clearRefers();
+                changeHead(tempNodeRight,tempNodeParent);
+            } else {
+                clearRefers();
+                changeHead(tempNodeLeft,tempNodeParent);
+            }
+            size--;
+            return true;
         }
-
-
-
         return false;
+        }
+    }
+    private void clearRefers() {
+        currentNode.left = null;
+        currentNode.right = null;
+        currentNode.parent = null;
+    }
+    private void changeHead (MyTreeNode tempLeg, MyTreeNode tempHead) {
+        currentNode = tempLeg;
+        if(tempHead == null) {
+            head = currentNode;
+        }
+        currentNode.parent = tempHead;
     }
 
     private int way(E o) {

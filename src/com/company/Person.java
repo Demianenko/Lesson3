@@ -12,7 +12,9 @@ public class Person {
         this.age = age;
         this.name = name;
     }
-
+    public String toString(){
+        return name;
+    }
     public Person() {
         this(10,"New Name");
     }
@@ -21,13 +23,10 @@ public class Person {
         @Override
         public int compare(Person p1, Person p2) {
             if (p1.age < p2.age) {
-                System.out.println("p1 < p2");
                 return  -1;
             } else if (p1.age>p2.age) {
-                System.out.println("p1 > p2");
                 return 1;
             } else {
-                System.out.println("p1 = p2");
                 return  0;
             }
         }

@@ -1,7 +1,8 @@
 package com.company;
 
 
-
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by sega on 11.04.2015.
@@ -42,17 +43,32 @@ public class MyTreeSet<E> {
         }
     }
     private class TreeIterator implements MyIterator {
+        private List<MyTreeNode> listOfTreeNode;
 
+        public TreeIterator() {
+            this.listOfTreeNode = new LinkedList<MyTreeNode>();
+            listOfTreeNode.add(head);
+        }
         @Override
         public boolean hasNext() {
-            return false;
+            return (!listOfTreeNode.isEmpty());
         }
 
         @Override
-        public Object next() {
-            return null;
+        public E next() {
+            E temp = listOfTreeNode.get(0).value;
+            MyTreeNode tempLeft = listOfTreeNode.get(0).left;
+            MyTreeNode tempRight = listOfTreeNode.get(0).right;
+            addToList(tempLeft);
+            addToList(tempRight);
+            listOfTreeNode.remove(0);
+            return temp;
         }
-
+        private void addToList(MyTreeNode leg){
+            if (leg != null) {
+                listOfTreeNode.add(leg);
+            }
+        }
         @Override
         public void remove() {
 
@@ -77,20 +93,14 @@ public class MyTreeSet<E> {
             if (temp < 0) {
                 currentNode.left = new MyTreeNode(o,currentNode,null,null);
                 size++;
-                System.out.println("Add in left " + o);
             } else if (temp > 0) {
                 currentNode.right = new MyTreeNode(o,currentNode,null,null);
                 size++;
-                System.out.println("Add in right " + o);
-            } else {
-                System.out.println("Duplicate" + o);
             }
         } else {
             head = new MyTreeNode(o);
             currentNode = head;
             size++;
-            System.out.println("Add in head " + o);
-            System.out.println("---------------------------");
         }
     }
     public  boolean contains(E o) {
@@ -181,6 +191,48 @@ public class MyTreeSet<E> {
         }
         return false;
 
+    }
+
+    public String toString() {
+        String temp = "";
+        TreeIterator iterator = new TreeIterator();
+        while (iterator.hasNext()) {
+            temp += iterator.listOfTreeNode.get(0).value + " ";
+            iterator.next();
+        }
+        return temp;
+    }
+
+    public StringBuilder toStringTree() {
+        StringBuilder temp = new StringBuilder();
+        MyTreeNode node = head;
+        MyTreeNode nodeLeft;
+        MyTreeNode nodeRight;
+        temp.append(filter(node));
+        while (node != null) {
+            nodeLeft = node.left;
+            nodeRight = node.right;
+            temp.append(filter(nodeLeft)).append(filter(nodeRight));
+
+            if (nodeLeft != null) {
+                node = nodeLeft;
+            } else if (nodeRight != null) {
+                node = nodeRight;
+            } else {
+                node = null;
+            }
+
+        }
+        return temp;
+    }
+    private String filter(MyTreeNode node) {
+        String filter;
+        if (node == null) {
+            filter = "null!";
+        } else {
+            filter = node.value.toString();
+        }
+        return filter;
     }
 }
 

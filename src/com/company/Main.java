@@ -8,13 +8,14 @@ public class Main {
         MyTreeSet<Person> treeSet = new MyTreeSet(new Person.PersonComparator());
 
 
-        treeSet.add(first);
+        //treeSet.add(first);
         treeSet.add(second);
         treeSet.add(new Person(25,"L1"));
         treeSet.add(new Person(20,"L2"));
         treeSet.add(new Person(23,"L3"));
         treeSet.add(new Person(20,"L4"));
         System.out.println(treeSet.size());
+        System.out.println(treeSet.contains(first));
 
         MyHashSet set = new MyHashSet();
     }

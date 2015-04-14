@@ -48,49 +48,88 @@ public class MyTreeSet<E> {
         return size;
     }
 
-    public void add(E value) {
-
-        if (size == 0) {
-            head = new MyTreeNode(value);
+    public void add(E o) {
+        int temp;
+        if(size!=0) {
+            currentNode = head;
+            temp = way(o);
+            while (isDeep(temp)) {
+                temp = way(o);
+            }
+            if (temp < 0) {
+                currentNode.left = new MyTreeNode(o,currentNode,null,null);
+                size++;
+                System.out.println("Add in left " + o);
+            } else if (temp > 0) {
+                currentNode.right = new MyTreeNode(o,currentNode,null,null);
+                size++;
+                System.out.println("Add in right " + o);
+            } else {
+                System.out.println("Duplicate" + o);
+            }
+        } else {
+            head = new MyTreeNode(o);
             currentNode = head;
             size++;
-            System.out.println("Add in head " + currentNode.value);
+            System.out.println("Add in head " + o);
             System.out.println("---------------------------");
+        }
+    }
+    public  boolean contains(E o) {
+        currentNode = head;
+        int temp = way(o);
+        while (isDeep(temp));
+        if (temp == 0) {
+            return true;
         } else {
-            this.value = value;
-            goDeep();
-            System.out.println("---------------------------");
+            return false;
+        }
+    }
+    public boolean remove (E o) {
+        if(size==0) {
+            return false;
+        }
+        currentNode = head;
+        if(size==1) {
+            if(way(o)==0) {
+               
+            }
+        }
+
+        int temp = way(o);
+        if (temp==0) {
+            if (size < 2) {
+
+            }
+        }
+        while (isDeep(temp));
+        if (temp == 0) {
 
         }
 
+
+
+        return false;
     }
-    private void goDeep() {
-        System.out.println("Go deeper");
-        int temp = comparator.compare(value,currentNode.value);
-        if (temp > 0){
-            System.out.println("Right leg");
-            if(currentNode.right!=null) {
-                currentNode = currentNode.right;
-                goDeep();
-            } else {
-                currentNode.right = new MyTreeNode(value,currentNode,null,null);
-                System.out.println("add in right " + currentNode.value);
-                size++;
-            }
-        } else if (temp < 0) {
-            System.out.println("Left leg");
-            if(currentNode.left!=null) {
+
+    private int way(E o) {
+        return comparator.compare(o,currentNode.value);
+    }
+    private boolean isDeep(int temp) {
+        if (temp < 0) {
+            if (currentNode.left != null) {
                 currentNode = currentNode.left;
-                goDeep();
-            } else {
-                currentNode.left = new MyTreeNode(value,currentNode,null,null);
-                System.out.println("add in left " + currentNode.value);
-                size++;
+                return true;
             }
-        } else {
-            System.out.println("Duplicate "+currentNode.value);
         }
-    }
+        if (temp > 0) {
+            if (currentNode.right != null) {
+                currentNode = currentNode.right;
+                return true;
+            }
+        }
+        return false;
 
+    }
 }
-//newNode = new MyTreeNode(value,currentNode,null,null);
+

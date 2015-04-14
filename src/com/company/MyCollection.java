@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by user on 21.02.2015.
+ * Created by sega on 24.03.2015.
  */
 public interface MyCollection {
     int size();
@@ -13,5 +13,4 @@ public interface MyCollection {
     MyIterator iterator();
 
     boolean remove(Object o);
-
 }

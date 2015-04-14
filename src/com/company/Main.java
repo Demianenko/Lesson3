@@ -1,101 +1,90 @@
 package com.company;
 
-import com.company.More.RecList;
-
 public class Main {
 
     public static void main(String[] args) {
-        MyLinkedList list = new MyLinkedList();
-        list.add(0);
-        list.add(1);
-        list.add(2);
-        System.out.println(list);
-        System.out.println("_______________________________________");
-        MyIterator it = list.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
-
-        }
-        MyIterator it1 = list.iterator();
-        while (it1.hasNext()) {
-            it1.next();
-            list.put(0,5);
-        }
-        System.out.println("__________________________________________");
-        MyIterator it2 = list.iterator();
-        while (it2.hasNext()) {
-            System.out.println(it2.next());
-        }
-        /*
-        MyLinkedList list = new MyLinkedList();
-        testMyLinkedList(list);
-        MyList rList = new RecList();
-        testMyRecList(rList);
-        */
+        Person first = new Person(50,"First");
+        Person second = new Person(75, "R1");
+        MyTreeSet<Person> treeSet = new MyTreeSet(new Person.PersonComparator());
 
 
+        //treeSet.add(first);
+        treeSet.add(second);
+        treeSet.add(new Person(25,"L1"));
+        treeSet.add(new Person(20,"L2"));
+        treeSet.add(new Person(23,"L3"));
+        treeSet.add(new Person(20,"L4"));
+        System.out.println(treeSet.size());
+        System.out.println(treeSet.contains(first));
 
+        MyHashSet set = new MyHashSet();
+    }
+
+    public static void testMyHashSet(MyHashSet set) {
+        System.out.println(set);
+        System.out.println(set.add(1));
+        System.out.println(set);
+        System.out.println(set.add(1));
+        System.out.println(set);
+        System.out.println(set.size());
+
+        System.out.println(set.add(2));
+        System.out.println(set);
+        System.out.println(set.add(0));
+        System.out.println(set);
+        System.out.println(set.add(3));
+        System.out.println(set);
+        System.out.println(set.add(5));
+        System.out.println(set);
+        System.out.println(set.add(0));
+        System.out.println(set.add(1));
+        System.out.println(set.add(2));
+        System.out.println(set.add(3));
+        System.out.println(set.add(5));
+        System.out.println(set);
+        MyIterator iterator = set.iterator();
+        System.out.println("-----------Iterator-----------");
+        System.out.println(iterator.hasNext());
+        System.out.println(iterator.next());
+        System.out.println(iterator.hasNext());
+        System.out.println(iterator.next());
+        System.out.println(iterator.hasNext());
+        System.out.println(iterator.next());
+        System.out.println(iterator.hasNext());
+        System.out.println(iterator.next());
+        System.out.println(iterator.hasNext());
+        System.out.println(iterator.next());
+        iterator.remove();
+        System.out.println(set);
 
     }
-    public static void testMyLinkedList(MyLinkedList list) {
+    public static void testMyLinkedList(MyList list) {
         System.out.println(list+"  "+list.size());
-
+        System.out.println(list.contains(0));
         list.add(0);
         System.out.println(list+"  "+list.size());
-
+        System.out.println(list.contains(0));
         list.add(1);
         System.out.println(list+"  "+list.size());
-
+        System.out.println(list.contains(0));
         list.add("h");
         System.out.println(list+"  "+list.size());
-
+        System.out.println(list.contains(0));
         list.insert(0,5);
         System.out.println(list+"  "+list.size());
-
-        list.remove(3);
-        System.out.println(list+"  "+list.size());
-
-        list.remove(0);
-        System.out.println(list+"  "+list.size());
-
+        System.out.println(list.contains(0));
         list.remove(1);
         System.out.println(list+"  "+list.size());
-
+        System.out.println(list.contains(0));
         list.remove(0);
         System.out.println(list+"  "+list.size());
+        System.out.println(list.contains(0));
+        list.remove(1);
+        System.out.println(list+"  "+list.size());
+        System.out.println(list.contains(0));
+        list.remove(0);
+        System.out.println(list+"  "+list.size());
+        System.out.println(list.contains(0));
+    }
 
-    }
-    public static void testMyRecList(MyList rList) {
-        System.out.println(rList.size());
-        System.out.println(rList);
-        System.out.println(rList.isEmpty());
-        rList.insert(0, 0);
-        System.out.println(rList);
-        System.out.println(rList.remove(0));
-        System.out.println(rList);
-        System.out.println(rList.isEmpty());
-        System.out.println(rList.contains(0));
-        rList.add(0);
-        rList.add(1);
-        rList.add(2);
-        rList.add(3);
-        rList.add(4);
-        System.out.println(rList);
-        System.out.println(rList.isEmpty());
-        System.out.println(rList + "    " + rList.size());
-        System.out.println(rList.get(4));
-        System.out.println(rList.indexOf(4));
-        System.out.println(rList.contains(5));
-        rList.put(0, "a");
-        rList.put(4,"b");
-        System.out.println(rList+"    "+rList.size());
-        rList.insert(0,"A");
-        System.out.println(rList+"    "+rList.size());
-        rList.insert(6,"B");
-        System.out.println(rList+"    "+rList.size());
-        rList.remove(0);
-        System.out.println(rList+"    "+rList.size());
-        rList.remove(5);
-        System.out.println(rList+"    "+rList.size());
-    }
 }

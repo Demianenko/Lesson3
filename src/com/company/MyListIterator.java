@@ -1,18 +1,21 @@
 package com.company;
 
 /**
- * Created by user on 21.02.2015.
+ * Created by sega on 18.03.2015.
  */
-public interface MyListIterator extends MyIterator {
+public interface MyListIterator {
+    boolean hasNext();
     boolean hasPrevious();
 
     Object previous();
-
+    Object next();
     int nextIndex();
 
     int previousIndex();
 
     void remove();
+    // если коолекция после создания итератора менялась
+    // то этот метод кинет ConcurrentModificationException
 
     void set(Object e);
 

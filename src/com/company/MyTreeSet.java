@@ -153,10 +153,59 @@ public class MyTreeSet<E> {
         }
     }
     public boolean remove (E o) {
-        if(size == 0) {
+        int temp = 0, lastTemp;
+        if (size <= 1) {
+            return fastRemove(o);
+        } else {
+            currentNode = head;
+            lastTemp = temp;
+            temp = way(o);
+            while (isDeep(temp)) {
+                lastTemp = temp;
+                temp = way(o);
+            }
+            if (temp == 0) {
+                return hardRemove(o,temp,lastTemp);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private boolean hardRemove(E o, int temp, int lastTemp) {
+        MyTreeNode tempNodeRight = currentNode.right;
+        MyTreeNode tempNodeLeft = currentNode.left;
+        MyTreeNode tempNodeParent = currentNode.parent;
+
+        if ((currentNode.left != null) && (currentNode.right != null)) {
+            clearRefers();
+            currentNode = tempNodeLeft;
+            while (currentNode.right != null) {
+                currentNode = currentNode.right;
+            }
+            currentNode.right = tempNodeRight;
+            tempNodeRight.parent = currentNode;
+            changedHead(tempNodeParent,lastTemp);
+
+        } else if (currentNode.left == null) {
+            clearRefers();
+            currentNode = tempNodeRight;
+            changedHead(tempNodeParent,lastTemp);
+        } else if (currentNode.right == null) {
+            clearRefers();
+            currentNode = tempNodeLeft;
+            changedHead(tempNodeParent,lastTemp);
+        }
+    size--;
+    return true;
+    }
+
+    private boolean fastRemove(E o) {
+        if (size == 0) {
             return false;
-        } else if(size == 1) {
-            if(way(o)==0) {
+        }
+        if (size == 1) {
+            if (way(o) == 0) {
                 head = null;
                 currentNode = head;
                 size--;
@@ -164,53 +213,30 @@ public class MyTreeSet<E> {
             } else {
                 return false;
             }
-        } else {
-            currentNode = head;
-            int temp = way(o);
-            while (isDeep(temp)) {
-                temp = way(o);
-            }
-        if (temp == 0) {
-            MyTreeNode tempNodeRight = currentNode.right;
-            MyTreeNode tempNodeLeft = currentNode.left;
-            MyTreeNode tempNodeParent = currentNode.parent;
-            if((currentNode.left != null) && (currentNode.right != null)) {
-                clearRefers();
-                currentNode = tempNodeLeft;
-                while (currentNode.right != null) {
-                    currentNode = currentNode.right;
-                }
-                currentNode.right = tempNodeRight;
-                tempNodeRight.parent = currentNode;
-                if(tempNodeParent == null) {
-                    head = currentNode;
-                }
-                currentNode.parent = tempNodeParent;
-            } else if(currentNode.left == null) {
-                clearRefers();
-                changeHead(tempNodeRight,tempNodeParent);
-            } else {
-                clearRefers();
-                changeHead(tempNodeLeft,tempNodeParent);
-            }
-            size--;
-            return true;
+
         }
         return false;
+    }
+    
+    private void changedHead(MyTreeNode tempNodeParent,int lastTemp ) {
+        if (tempNodeParent == null) {
+            head = currentNode;
+        } else {
+            if (lastTemp < 0) {
+                tempNodeParent.left = currentNode;
+            } else {
+                tempNodeParent.right = currentNode;
+            }
         }
+        currentNode.parent = tempNodeParent;
     }
     private void clearRefers() {
         currentNode.left = null;
         currentNode.right = null;
         currentNode.parent = null;
     }
-    private void changeHead (MyTreeNode tempLeg, MyTreeNode tempHead) {
-        currentNode = tempLeg;
-        if(tempHead == null) {
-            head = currentNode;
-        }
-        currentNode.parent = tempHead;
-    }
+
+
 
     private int way(E o) {
         return comparator.compare(o,currentNode.value);

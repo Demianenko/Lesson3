@@ -217,10 +217,11 @@ public class MyTreeSet<E> {
         }
         return false;
     }
-    
+
     private void changedHead(MyTreeNode tempNodeParent,int lastTemp ) {
         if (tempNodeParent == null) {
             head = currentNode;
+            currentNode.parent = tempNodeParent;
         } else {
             if (lastTemp < 0) {
                 tempNodeParent.left = currentNode;
@@ -228,7 +229,7 @@ public class MyTreeSet<E> {
                 tempNodeParent.right = currentNode;
             }
         }
-        currentNode.parent = tempNodeParent;
+
     }
     private void clearRefers() {
         currentNode.left = null;

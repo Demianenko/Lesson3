@@ -74,6 +74,43 @@ public class MyTreeSet<E> {
 
         }
     }
+    private class TreeIteratorDeep implements MyIterator {
+        MyTreeNode node;
+        int lastLeg = 0;
+        E lastValue;
+        public TreeIteratorDeep(){
+            this.node = new MyTreeNode(null,null,null,head);
+        }
+        @Override
+        public boolean hasNext() {
+            do {
+                if ((node.left != null) && (node.left != lastValue)) {
+                    lastValue = node.left.value;
+                    lastLeg = -1;
+                    return true;
+                } else if ((node.right != null) && (node.right != lastValue)) {
+                    lastValue = node.right.value;
+                    lastLeg = 1;
+                    return true;
+                } else {
+                    if (node.parent != null) {
+                        node = node.parent;
+                    }
+                }
+            } while (node.parent != null);
+            return false;
+        }
+
+        @Override
+        public E next() {
+            return lastValue;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+    }
 
     public Boolean isEmpty() {
         return size == 0;
@@ -81,7 +118,9 @@ public class MyTreeSet<E> {
     public int size() {
         return size;
     }
-
+    public MyIterator iterator() {
+        return new TreeIterator();
+    }
     public void add(E o) {
         int temp;
         if(size!=0) {

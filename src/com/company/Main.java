@@ -18,7 +18,12 @@ public class Main {
         treeSet.add(new Person(74,"/R1 - L/"));
         treeSet.add(new Person(73,"//R1 - L - L//"));
         System.out.println(treeSet);
-       // System.out.println(treeSet.toStringTree());
+        MyIterator iterator = treeSet.iterator();
+        System.out.println(iterator.hasNext());
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
 
         MyHashSet set = new MyHashSet();
     }
